@@ -1,7 +1,7 @@
 [project]
-name = "chebupelka"
+name = "yantra"
 version = "0.1.0"
-description = "Minimal coding agent"
+description = "Minimal coding agent (fork of chebupelka)"
 requires-python = ">=3.10"
 dependencies = [
     "requests>=2.31.0",

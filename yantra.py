@@ -1,11 +1,14 @@
-"""Minimal coding agent loop — one tool: bash."""
+"""Minimal coding agent loop — one tool: bash.
+
+Fork of alexey-goloburdin/chebupelka (https://github.com/alexey-goloburdin/chebupelka).
+"""
 import json, sys, subprocess
 import requests
 
 
-LLM_BASE_URL = "http://ip:port/v1"
-LLM_API_KEY = "..."
-LLM_MODEL = "..."
+LLM_BASE_URL = "http://127.0.0.1:11434/v1"
+LLM_API_KEY = "ollama"
+LLM_MODEL = "qwen3:1.7b"
 LLM_HEADERS = {"Content-Type": "application/json", "Authorization": f"Bearer {LLM_API_KEY}"}
 MAX_TURNS = 1000
 
@@ -20,7 +23,30 @@ Workflow:
 3. After gathering enough information or completing the task, give your final answer in natural language.
 4. To finish, reply with a regular message (no tool call).
 
-Be concise. Explain what you're doing before each command."""
+Be concise. Explain what you're doing before each command.
+
+If the user explicitly asks you to inspect files, run a command, execute bash,
+check the repository, or verify something in the environment, you MUST use
+the bash tool before answering.
+
+Never invent or simulate command output.
+Never describe what a command "would" output.
+Only report command results that were actually returned by the bash tool.
+
+When the user's request is ambiguous about filesystem scope, do not assume the current directory is the whole workspace.
+
+If the user asks about:
+- local repositories
+- projects
+- workspace
+- all repos
+- sibling repositories
+
+first inspect the current path with `pwd`, then inspect relevant parent directories.
+
+For Git repositories, prefer detecting `.git` directories rather than listing arbitrary files.
+
+Never call ordinary files "repositories"."""
 
 LLM_TOOLS = [
     {"type": "function",

@@ -1,0 +1,12 @@
+; tasks.my — durable task plan for yantra (fork of
+; alexey-goloburdin/chebupelka, adapted).
+
+((tasks . (
+  ("YANTRA-DOCUMENT-ADAPTATION-FROM-UPSTREAM" . (
+    (priority . 4.0)
+    (capabilities . (documentation license))
+    (origin . yantra)
+    (description . "README credits the fork honestly ('оригінальний автор і задум належать йому') but no LICENSE file or NOTICE was found confirming upstream chebupelka's license terms are carried forward correctly, and no doc yet states specifically what was adapted/changed for this project's own needs vs kept as-is. Write both: a NOTICE preserving upstream attribution/license, and a short changelog-style note on what's actually different from chebupelka.")
+    (done . ())
+  ))
+)))
